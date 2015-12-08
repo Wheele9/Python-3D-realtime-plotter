@@ -24,39 +24,38 @@ def make_the_plot(port1, baud1, duration):
 
     cc=0
     while ser and cc<duration:
-        if ser:
-            raw = (ser.readline())
-            splitted= raw.split()
-            cc=cc+1
-            print(cc)
-            if 'reading' in splitted:
 
-                print("error in sensor reading")
-                msg = "Error in sensor readng"+raw
-                return msg  
-            try:
-                ax.cla()
-                x=float(splitted[0])
-                y=float(splitted[1])
-                z=float(splitted[2])
+        raw = (ser.readline())
+        splitted= raw.split()
+        cc=cc+1
+        print(cc)
+        if 'reading' in splitted:
 
-                ax.scatter(x,y,z)
-                ax.set_xlim([0, 50])
-                ax.set_ylim([0, 50])
-                ax.set_zlim([0, 55])
-                ax.set_xlabel('x [mm]')
-                ax.set_ylabel('y [mm]')
-                ax.set_zlabel('z [mm]')
+            print("error in sensor reading")
+            msg = "Error in sensor readng"+raw
+            return msg  
+        try:
+            ax.cla()
+            x=float(splitted[0])
+            y=float(splitted[1])
+            z=float(splitted[2])
 
-                plt.draw()
-                plt.pause(0.003)
+            ax.scatter(x,y,z)
+            ax.set_xlim([0, 50])
+            ax.set_ylim([0, 50])
+            ax.set_zlim([0, 55])
+            ax.set_xlabel('x [mm]')
+            ax.set_ylabel('y [mm]')
+            ax.set_zlabel('z [mm]')
+
+            plt.draw()
+            plt.pause(0.003)
                 
-            except:
-                pass
+        except:
+            pass
             
-            msg="time's up"
+        msg="time's up"
 
-        else: msg='Serial connection lost'
     print (msg)
     return msg    
 
