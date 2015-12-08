@@ -79,7 +79,6 @@ def read_entries():
             l1.grid(row=7, column=2)
     except ValueError:
         pass
-        #START_button.destroy()
 
     try:
         global baud
@@ -90,7 +89,6 @@ def read_entries():
         l3.grid(row=8, column=2)
     except ValueError:
         pass
-        #START_button.destroy()
 
     try:
         global duration
@@ -101,17 +99,14 @@ def read_entries():
         l4.grid(row=9, column=2)
     except ValueError:
         pass
-        #START_button.destroy()
-
+ 
     if a==1 and b==1 and c==1:
-        #l1=Label(root, text='                                             ').grid(row=7, column=2)
-        #l3=Label(root, text="                                             ").grid(row=8, column=2)
-        #l4=Label(root, text="                                             ").grid(row=9, column=2)
+
         pass
         START_button = Button(root, text='Start visualization!', command=star3d).grid(row=8, column=2)
         
 def star3d():
-    duration=80
+    #duration=80
     msg=make_the_plot(port,baud, duration)
     Label(root, text=msg).grid(row=7, column=2)
 
