@@ -27,7 +27,7 @@ def make_the_plot(port1, baud1, duration):
         raw = (ser.readline())
         splitted= raw.split()
         cc=cc+1
-
+        print(cc)
         if 'reading' in splitted:
 
             print("error in sensor reading")

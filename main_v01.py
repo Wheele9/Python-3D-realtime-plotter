@@ -6,7 +6,7 @@ import sys
 import glob
 import serial
 from tkinter import *
-from DEFmain import make_the_plot
+from plot_v01 import make_the_plot
 
 
 def serial_ports():
