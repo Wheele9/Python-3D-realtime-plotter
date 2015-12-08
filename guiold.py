@@ -38,9 +38,6 @@ def serial_ports():
             pass
     return result
 
-def my_callback():
-    print("The button was clicked!")  # Prints to console not the GUI
-    msg= 'comports:'
 
 def print_content():
     print(entry.get())
@@ -58,7 +55,7 @@ def read_entries():
     a=0
     b=0
     c=0
-    #START_button = Button(root, text='Start visualization!', command=star3d).grid(row=8, column=2)
+    
     l4=Label(root, text="Not valid duration!")
     l4.grid(row=9, column=2)
     l1=Label(root, text='COMport unavailable!')
@@ -106,7 +103,7 @@ def read_entries():
         START_button = Button(root, text='Start visualization!', command=star3d).grid(row=8, column=2)
         
 def star3d():
-    #duration=80
+    
     msg=make_the_plot(port,baud, duration)
     Label(root, text=msg).grid(row=7, column=2)
 
