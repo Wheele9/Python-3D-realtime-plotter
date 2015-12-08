@@ -54,24 +54,62 @@ def showCOMs():
     my_text3.grid(row=2, column=1)
 
 def read_entries():
-    global port
-    port=e1.get().upper()
-    print (port)
+    
+    a=0
+    b=0
+    c=0
+    #START_button = Button(root, text='Start visualization!', command=star3d).grid(row=8, column=2)
+    l4=Label(root, text="Not valid duration!")
+    l4.grid(row=9, column=2)
+    l1=Label(root, text='COMport unavailable!')
+    l1.grid(row=7, column=2)
+    l3=Label(root, text="Not valid baudrate!")
+    l3.grid(row=8, column=2)
+    
+    
+
+    try:
+        global port
+        port=e1.get().upper()
+        if port in serial_ports():
+            a=1
+            print ('port ok')
+            l1.grid_remove()
+            l1=Label(root, text="                                    ")
+            l1.grid(row=7, column=2)
+    except ValueError:
+        pass
+        #START_button.destroy()
+
     try:
         global baud
         baud = int(e2.get())
-        #l1.pack_forget()
+        b=1
+        l3.destroy()
+        l3=Label(root, text="                                        ")
+        l3.grid(row=8, column=2)
     except ValueError:
-        l1=Label(root, text="That's not a valid baud rate!").grid(row=9, column=2)
-    if port in serial_ports():
+        pass
+        #START_button.destroy()
 
+    try:
+        global duration
+        duration =int(e3.get())
+        c=1
+        l4.grid_remove()
+        l4=Label(root, text="                                          ")
+        l4.grid(row=9, column=2)
+    except ValueError:
+        pass
+        #START_button.destroy()
+
+    if a==1 and b==1 and c==1:
+        #l1=Label(root, text='                                             ').grid(row=7, column=2)
+        #l3=Label(root, text="                                             ").grid(row=8, column=2)
+        #l4=Label(root, text="                                             ").grid(row=9, column=2)
+        pass
         START_button = Button(root, text='Start visualization!', command=star3d).grid(row=8, column=2)
-        #l2.pack_forget()
-        #l3.pack_forget()
-    else:
-        l2=Label(root, text='The selected COM port is not available!').grid(row=6, column=2)
-        l3=Label(root, text='Choose an other one!').grid(row=7, column=2)
-    
+        
 def star3d():
     duration=80
     msg=make_the_plot(port,baud, duration)
