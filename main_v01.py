@@ -43,9 +43,9 @@ def print_content():
 
 def showCOMs():
     print (serial_ports())
-    my_text2 = Label(root, text='Available COM ports:')
+    my_text2 = Label(root, text='Available COM ports:',background='SlateGray1')
     
-    my_text3= Label(root, text=serial_ports())
+    my_text3= Label(root, text=serial_ports(),background='SlateGray1')
     my_text2.grid(row=1, column=1)
     my_text3.grid(row=2, column=1)
 
@@ -55,11 +55,11 @@ def read_entries():
     b=0
     c=0
     
-    l4=Label(root, text="Not valid duration!")
+    l4=Label(root, text="Not valid duration!",background='SlateGray1')
     l4.grid(row=9, column=2)
-    l1=Label(root, text='COMport unavailable!')
+    l1=Label(root, text='COMport unavailable!',background='SlateGray1')
     l1.grid(row=7, column=2)
-    l3=Label(root, text="Not valid baudrate!")
+    l3=Label(root, text="Not valid baudrate!",background='SlateGray1')
     l3.grid(row=8, column=2)
     
     
@@ -71,7 +71,7 @@ def read_entries():
             a=1
             
             l1.grid_remove()
-            l1=Label(root, text="                                    ")
+            l1=Label(root, text="                                    ",background='SlateGray1')
             l1.grid(row=7, column=2)
     except ValueError:
         pass
@@ -81,7 +81,7 @@ def read_entries():
         baud = int(e2.get())
         b=1
         l3.destroy()
-        l3=Label(root, text="                                        ")
+        l3=Label(root, text="                                        ",background='SlateGray1')
         l3.grid(row=8, column=2)
     except ValueError:
         pass
@@ -91,7 +91,7 @@ def read_entries():
         duration =int(e3.get())
         c=1
         l4.grid_remove()
-        l4=Label(root, text="                                          ")
+        l4=Label(root, text="                                          ",background='SlateGray1')
         l4.grid(row=9, column=2)
     except ValueError:
         pass
@@ -99,7 +99,7 @@ def read_entries():
     if a==1 and b==1 and c==1:
 
         pass
-        START_button = Button(root, text='Start visualization!', command=star3d).grid(row=8, column=2)
+        START_button = Button(root, text='Start visualization!', command=star3d,bg="SteelBlue1").grid(row=8, column=2)
         
 def star3d():
     
@@ -110,12 +110,12 @@ def closeprog():
     quit()
 
 root = Tk()
-print_button = Button(root, text='Show existing COM ports!', command=showCOMs)
+print_button = Button(root, text='Show existing COM ports!', command=showCOMs,bg="SteelBlue1")
 print_button.grid(row=0, column=1)
 
-my_text1 = Label(root, text='Choose COM port').grid(row=4, column=1)
-my_text2= Label(root, text='Choose baud rate').grid(row=5, column=1)
-my_text3= Label(root, text='Duration [s]').grid(row=6, column=1)
+my_text1 = Label(root, text='Choose COM port',background='SlateGray1').grid(row=4, column=1)
+my_text2= Label(root, text='Choose baud rate',background='SlateGray1').grid(row=5, column=1)
+my_text3= Label(root, text='Duration [s]',background='SlateGray1').grid(row=6, column=1)
 
 e1 = Entry(root)
 e1.grid(row=4, column=2)
@@ -125,15 +125,15 @@ e3 = Entry(root)
 e3.grid(row=6, column=2)
 
 
-Button(root, text='Read data', command=read_entries).grid(row=3, column=2 )
+Button(root, text='Read data', command=read_entries,bg="SteelBlue1").grid(row=3, column=2 )
 root.title("data visualization")
-root.geometry("350x200+500+500")
-
-menu_bar = Menu(root)
-file_menu = Menu(menu_bar, tearoff=0)
-file_menu.add_command(label=" Quit", command=closeprog)
-menu_bar.add_cascade(label="File", menu=file_menu)
-root.config(menu=menu_bar)
+root.geometry("350x250+500+500")
+root.configure(background='SlateGray1')
+# menu_bar = Menu(root)
+# file_menu = Menu(menu_bar, tearoff=0)
+# file_menu.add_command(label=" Quit", command=closeprog)
+# menu_bar.add_cascade(label="File", menu=file_menu)
+# root.config(menu=menu_bar)
 
 root.mainloop()
 

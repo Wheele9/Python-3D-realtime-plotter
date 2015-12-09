@@ -16,17 +16,17 @@ def make_the_plot(port1, baud1, duration):
 
     ax = fig.add_subplot(111, projection='3d')
 
-    port = port1
+    port = port1 
     baudrate = baud1
     ser = serial.Serial(port, baudrate)
 
-
-    cc=0
-    while ser and cc<duration:
+    maxtime=2*duration ##considering delays in ardu code 
+    realtime=0
+    while ser and realtime<maxtime:
 
         raw = (ser.readline())
         splitted= raw.split()
-        cc=cc+1
+        realtime=realtime+1
         
         if 'reading' in splitted:
 
@@ -59,4 +59,6 @@ def make_the_plot(port1, baud1, duration):
     return msg    
 
 if __name__ == '__main__':
+
+    ###MODIFY THEESE :D ####
     make_the_plot('COM7',9600,100)   
