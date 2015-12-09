@@ -69,7 +69,7 @@ def read_entries():
         port=e1.get().upper()
         if port in serial_ports():
             a=1
-            print ('port ok')
+            
             l1.grid_remove()
             l1=Label(root, text="                                    ")
             l1.grid(row=7, column=2)

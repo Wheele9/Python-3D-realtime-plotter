@@ -27,7 +27,7 @@ def make_the_plot(port1, baud1, duration):
         raw = (ser.readline())
         splitted= raw.split()
         cc=cc+1
-        print(cc)
+        
         if 'reading' in splitted:
 
             print("error in sensor reading")
@@ -40,12 +40,12 @@ def make_the_plot(port1, baud1, duration):
             z=float(splitted[2])
 
             ax.scatter(x,y,z)
-            ax.set_xlim([0, 50])
-            ax.set_ylim([0, 50])
-            ax.set_zlim([0, 55])
-            ax.set_xlabel('x [mm]')
-            ax.set_ylabel('y [mm]')
-            ax.set_zlabel('z [mm]')
+            ax.set_xlim([0, 100])
+            ax.set_ylim([0, 100])
+            ax.set_zlim([0, 100])
+            ax.set_xlabel('x [cm]')
+            ax.set_ylabel('y [cm]')
+            ax.set_zlabel('z [cm]')
 
             plt.draw()
             plt.pause(0.003)
