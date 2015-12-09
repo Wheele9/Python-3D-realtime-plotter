@@ -99,7 +99,7 @@ def read_entries():
     if a==1 and b==1 and c==1:
 
         pass
-        START_button = Button(root, text='Start visualization!', command=star3d,bg="SteelBlue1").grid(row=8, column=2)
+        START_button = Button(root, text='Start visualization!', command=star3d,bg="SteelBlue1",padx=5,pady=5).grid(row=8, column=2)
         
 def star3d():
     
@@ -110,7 +110,7 @@ def closeprog():
     quit()
 
 root = Tk()
-print_button = Button(root, text='Show existing COM ports!', command=showCOMs,bg="SteelBlue1")
+print_button = Button(root, text='Show existing COM ports!', command=showCOMs,bg="SteelBlue1",padx=5,pady=5)
 print_button.grid(row=0, column=1)
 
 my_text1 = Label(root, text='Choose COM port',background='SlateGray1').grid(row=4, column=1)
@@ -125,15 +125,10 @@ e3 = Entry(root)
 e3.grid(row=6, column=2)
 
 
-Button(root, text='Read data', command=read_entries,bg="SteelBlue1").grid(row=3, column=2 )
+Button(root, text='Read data', command=read_entries,bg="SteelBlue1",padx=5,pady=5).grid(row=3, column=2 )
 root.title("data visualization")
-root.geometry("350x250+500+500")
+root.geometry("300x250+500+500")
 root.configure(background='SlateGray1')
-# menu_bar = Menu(root)
-# file_menu = Menu(menu_bar, tearoff=0)
-# file_menu.add_command(label=" Quit", command=closeprog)
-# menu_bar.add_cascade(label="File", menu=file_menu)
-# root.config(menu=menu_bar)
 
 root.mainloop()
 

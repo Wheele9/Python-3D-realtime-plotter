@@ -28,7 +28,7 @@ def make_the_plot(port1, baud1, duration):
         raw = (ser.readline())
         splitted= raw.split()
         realtime=realtime+1
-        
+        #print (realtime, maxtime)
         if 'reading' in splitted:
 
             print("error in sensor reading")
@@ -44,6 +44,7 @@ def make_the_plot(port1, baud1, duration):
             ax.set_xlim([0, 100])
             ax.set_ylim([0, 100])
             ax.set_zlim([0, 100])
+            #fig.suptitle("Title centered above all subplots", fontsize=14)
             ax.set_xlabel('x [cm]')
             ax.set_ylabel('y [cm]')
             ax.set_zlabel('z [cm]')
