@@ -5,13 +5,14 @@ import glob
 import serial
 from mpl_toolkits.mplot3d import axes3d
 import matplotlib.pyplot as plt
-
+import matplotlib as mpl
 
 
 def make_the_plot(port1, baud1, duration):
 
 
     plt.ion()
+    mpl.rcParams['toolbar'] = 'None'
     fig = plt.figure()
 
     ax = fig.add_subplot(111, projection='3d')
@@ -46,7 +47,7 @@ def make_the_plot(port1, baud1, duration):
             ax.set_xlabel('x [cm]')
             ax.set_ylabel('y [cm]')
             ax.set_zlabel('z [cm]')
-
+            plt.tight_layout()
             plt.draw()
             plt.pause(0.003)
                 

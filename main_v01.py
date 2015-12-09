@@ -104,7 +104,7 @@ def read_entries():
 def star3d():
     
     msg=make_the_plot(port,baud, duration)
-    Label(root, text=msg).grid(row=7, column=2)
+    Label(root, text=msg, bg="SteelBlue1").grid(row=7, column=2)
 
 def closeprog():
     quit()
