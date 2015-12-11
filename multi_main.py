@@ -12,7 +12,7 @@ import matplotlib as mpl
 
 def make_the_plot(port1, baud1):
 
-
+    print ("maketheplotstaring")
     plt.ion()
     mpl.rcParams['toolbar'] = 'None'
     fig = plt.figure()
@@ -28,9 +28,9 @@ def make_the_plot(port1, baud1):
     while ser:
 
         print ("runprog: ",run_prog)
-        if run_prog==1: print ("we can continue running")
-        else: 
-            print ("we should stop now") 
+        if run_prog==0:
+            ser.close()
+            quit()
             break
         raw = (ser.readline())
         splitted= raw.split()
@@ -61,11 +61,9 @@ def make_the_plot(port1, baud1):
                 
         except:
             pass
-            
-        msg="time's up"
+    fig.close()
+    return
 
-    print (msg)
-    return msg   
 
 def serial_ports():
     """ Lists serial port names
@@ -147,7 +145,7 @@ def star3d():
     run_prog=1
     global t
     t=Thread(target=make_the_plot, args=(port,baud))
-
+    #t.deamon=True
     t.start()
     END_button = Button(root, text='End visualization!', command=end3d,bg="SteelBlue1",padx=5,pady=5).grid(row=9, column=2)
 
@@ -155,6 +153,8 @@ def end3d():
     global run_prog
     run_prog=0
     print ('end3d ran')
+    quit()
+
 
 def closeprog():
     quit()
