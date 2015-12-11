@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+
+
 import sys
 import glob
 import serial
@@ -12,35 +14,30 @@ import matplotlib as mpl
 
 def make_the_plot(port1, baud1):
 
-    print ("maketheplotstaring")
+    
     plt.ion()
     mpl.rcParams['toolbar'] = 'None'
     fig = plt.figure()
-
     ax = fig.add_subplot(111, projection='3d')
-
     port = port1 
     baudrate = baud1
     ser = serial.Serial(port, baudrate)
 
-    
-    realtime=0
     while ser:
 
-        print ("runprog: ",run_prog)
         if run_prog==0:
             ser.close()
             quit()
             break
         raw = (ser.readline())
         splitted= raw.split()
-        realtime=realtime+1
+
 
         if 'reading' in splitted:
 
             print("error in sensor reading")
             msg = "Error in sensor readng "+raw
-            return msg  
+            return  
         try:
             ax.cla()
             x=float(splitted[0])
@@ -95,10 +92,11 @@ def serial_ports():
 
 
 def print_content():
-    print(entry.get())
+    #print(entry.get())
+    pass
 
 def showCOMs():
-    print (serial_ports())
+    
     my_text2 = Label(root, text='Available COM ports:',background='SlateGray1')
     
     my_text3= Label(root, text=serial_ports(),background='SlateGray1')
@@ -152,7 +150,6 @@ def star3d():
 def end3d():
     global run_prog
     run_prog=0
-    print ('end3d ran')
     quit()
 
 
