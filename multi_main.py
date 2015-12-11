@@ -2,19 +2,13 @@
 # -*- coding: utf-8 -*-
 
 import sys
-import sys
 import glob
 import serial
 from tkinter import *
-from multi_plot import make_the_plot
-from minimal import make_the_plotss
 from threading import Thread
-
-import serial
 from mpl_toolkits.mplot3d import axes3d
 import matplotlib.pyplot as plt
 import matplotlib as mpl
-
 
 def make_the_plot(port1, baud1, duration):
 
@@ -32,11 +26,11 @@ def make_the_plot(port1, baud1, duration):
     
     realtime=0
     while ser and realtime<duration:
-
+        print ("runprog: ",run_prog)
         raw = (ser.readline())
         splitted= raw.split()
         realtime=realtime+1
-        print (stopmsg)
+
         if 'reading' in splitted:
 
             print("error in sensor reading")
@@ -161,8 +155,8 @@ def read_entries():
         START_button = Button(root, text='Start visualization!', command=star3d,bg="SteelBlue1",padx=5,pady=5).grid(row=8, column=2)
         
 def star3d():
-    global stopmsg
-    stopmsg=0
+    global run_prog
+    run_prog=1
     global t
     t=Thread(target=make_the_plot, args=(port,baud,duration))
     #msg=make_the_plot(port,baud, duration)
@@ -171,9 +165,9 @@ def star3d():
     END_button = Button(root, text='End visualization!', command=end3d,bg="SteelBlue1",padx=5,pady=5).grid(row=9, column=2)
 
 def end3d():
-
-    stopmsg=1
-    print ('endee')
+    global run_prog
+    run_prog=0
+    print ('end3d ran')
 
 def closeprog():
     quit()
@@ -193,6 +187,8 @@ e2.grid(row=5, column=2)
 e3 = Entry(root)
 e3.grid(row=6, column=2)
 
+
+run_prog=1
 
 Button(root, text='Read data', command=read_entries,bg="SteelBlue1",padx=5,pady=5).grid(row=3, column=2 )
 root.title("data visualization")
