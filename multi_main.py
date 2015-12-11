@@ -39,12 +39,13 @@ def make_the_plot(port1, baud1):
             msg = "Error in sensor readng "+raw
             return  
         try:
-            ax.cla()
+            #ax.cla()
             x=float(splitted[0])
             y=float(splitted[1])
             z=float(splitted[2])
-
+            
             ax.scatter(x,y,z)
+            #ax.plot(x,y,z)
             ax.set_xlim([0, 100])
             ax.set_ylim([0, 100])
             ax.set_zlim([0, 100])
