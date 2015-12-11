@@ -6,8 +6,67 @@ import sys
 import glob
 import serial
 from tkinter import *
-from plot_v01 import make_the_plot
+from multi_plot import make_the_plot
 from minimal import make_the_plotss
+from threading import Thread
+
+import serial
+from mpl_toolkits.mplot3d import axes3d
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+
+
+def make_the_plot(port1, baud1, duration):
+
+
+    plt.ion()
+    mpl.rcParams['toolbar'] = 'None'
+    fig = plt.figure()
+
+    ax = fig.add_subplot(111, projection='3d')
+
+    port = port1 
+    baudrate = baud1
+    ser = serial.Serial(port, baudrate)
+
+    
+    realtime=0
+    while ser and realtime<duration:
+
+        raw = (ser.readline())
+        splitted= raw.split()
+        realtime=realtime+1
+        print (stopmsg)
+        if 'reading' in splitted:
+
+            print("error in sensor reading")
+            msg = "Error in sensor readng "+raw
+            return msg  
+        try:
+            ax.cla()
+            x=float(splitted[0])
+            y=float(splitted[1])
+            z=float(splitted[2])
+
+            ax.scatter(x,y,z)
+            ax.set_xlim([0, 100])
+            ax.set_ylim([0, 100])
+            ax.set_zlim([0, 100])
+            #fig.suptitle("Title centered above all subplots", fontsize=14)
+            ax.set_xlabel('x [cm]')
+            ax.set_ylabel('y [cm]')
+            ax.set_zlabel('z [cm]')
+            plt.tight_layout()
+            plt.draw()
+            plt.pause(0.003)
+                
+        except:
+            pass
+            
+        msg="time's up"
+
+    print (msg)
+    return msg   
 
 def serial_ports():
     """ Lists serial port names
@@ -102,9 +161,19 @@ def read_entries():
         START_button = Button(root, text='Start visualization!', command=star3d,bg="SteelBlue1",padx=5,pady=5).grid(row=8, column=2)
         
 def star3d():
-    
-    msg=make_the_plot(port,baud, duration)
-    Label(root, text=msg, bg="SteelBlue1").grid(row=7, column=2)
+    global stopmsg
+    stopmsg=0
+    global t
+    t=Thread(target=make_the_plot, args=(port,baud,duration))
+    #msg=make_the_plot(port,baud, duration)
+    #Label(root, text=msg, bg="SteelBlue1").grid(row=7, column=2)
+    t.start()
+    END_button = Button(root, text='End visualization!', command=end3d,bg="SteelBlue1",padx=5,pady=5).grid(row=9, column=2)
+
+def end3d():
+
+    stopmsg=1
+    print ('endee')
 
 def closeprog():
     quit()
