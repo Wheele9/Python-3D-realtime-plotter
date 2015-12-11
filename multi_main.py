@@ -10,7 +10,7 @@ from mpl_toolkits.mplot3d import axes3d
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 
-def make_the_plot(port1, baud1, duration):
+def make_the_plot(port1, baud1):
 
 
     plt.ion()
@@ -25,8 +25,13 @@ def make_the_plot(port1, baud1, duration):
 
     
     realtime=0
-    while ser and realtime<duration:
+    while ser:
+
         print ("runprog: ",run_prog)
+        if run_prog==1: print ("we can continue running")
+        else: 
+            print ("we should stop now") 
+            break
         raw = (ser.readline())
         splitted= raw.split()
         realtime=realtime+1
@@ -106,10 +111,10 @@ def read_entries():
     
     a=0
     b=0
-    c=0
+    #c=0
     
-    l4=Label(root, text="Not valid duration!",background='SlateGray1')
-    l4.grid(row=9, column=2)
+    #l4=Label(root, text="Not valid duration!",background='SlateGray1')
+    #l4.grid(row=9, column=2)
     l1=Label(root, text='COMport unavailable!',background='SlateGray1')
     l1.grid(row=7, column=2)
     l3=Label(root, text="Not valid baudrate!",background='SlateGray1')
@@ -139,17 +144,7 @@ def read_entries():
     except ValueError:
         pass
 
-    try:
-        global duration
-        duration =int(e3.get())
-        c=1
-        l4.grid_remove()
-        l4=Label(root, text="                                          ",background='SlateGray1')
-        l4.grid(row=9, column=2)
-    except ValueError:
-        pass
- 
-    if a==1 and b==1 and c==1:
+    if a==1 and b==1:
 
         pass
         START_button = Button(root, text='Start visualization!', command=star3d,bg="SteelBlue1",padx=5,pady=5).grid(row=8, column=2)
@@ -158,7 +153,7 @@ def star3d():
     global run_prog
     run_prog=1
     global t
-    t=Thread(target=make_the_plot, args=(port,baud,duration))
+    t=Thread(target=make_the_plot, args=(port,baud))
     #msg=make_the_plot(port,baud, duration)
     #Label(root, text=msg, bg="SteelBlue1").grid(row=7, column=2)
     t.start()
@@ -178,14 +173,14 @@ print_button.grid(row=0, column=1)
 
 my_text1 = Label(root, text='Choose COM port',background='SlateGray1').grid(row=4, column=1)
 my_text2= Label(root, text='Choose baud rate',background='SlateGray1').grid(row=5, column=1)
-my_text3= Label(root, text='Duration [n]',background='SlateGray1').grid(row=6, column=1)
+#my_text3= Label(root, text='Duration [n]',background='SlateGray1').grid(row=6, column=1)
 
 e1 = Entry(root)
 e1.grid(row=4, column=2)
 e2 = Entry(root)
 e2.grid(row=5, column=2)
-e3 = Entry(root)
-e3.grid(row=6, column=2)
+#e3 = Entry(root)
+#e3.grid(row=6, column=2)
 
 
 run_prog=1

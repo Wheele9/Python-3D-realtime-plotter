@@ -9,6 +9,8 @@ def secondthread():
 	while 1:
 		print (dataa)
 		time.sleep(1)
+		if dataa==23: break
+	print ("borkenout")
 
 def changedat():
 	global dataa
