@@ -1,7 +1,28 @@
-Hi Sathwik!
 
-To start the 3-d plotting connect your arduino to the PC first.
-After that you can start the program by opening a command prompt in the src folder(Shift+right click and select Open command window here). Type:
-python main.v_01
+Overview
+========
 
-A window will pop up, where You can fill the settings, Click on Read Data, and if your settings are ok, then a new button wil show up. Click that and the 3D plotting start right away.
+This script is a demo, showing an object moving in the 3D space in real time with matplotlib.
+
+Requirements
+============
+
+* Python 3.5
+* Pyserial
+* matplotlib 
+
+* Tested on Windows
+
+Run
+=======
+
+Connect your microcontroller to the PC with serialport, and send the x, y, z coordinates.
+Example:
+
+Serial.print(x);
+Serial.print('\t')
+Serial.print(y);
+Serial.print('\t')
+Serial.print(z);
+Serial.println("");
+

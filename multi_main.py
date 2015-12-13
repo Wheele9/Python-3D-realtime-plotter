@@ -1,8 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-
-
 import sys
 import glob
 import serial
@@ -22,7 +20,9 @@ def make_the_plot(port1, baud1):
     port = port1 
     baudrate = baud1
     ser = serial.Serial(port, baudrate)
-
+    Xs=[]
+    Ys=[]
+    Zs=[]
     while ser:
 
         if run_prog==0:
@@ -39,17 +39,15 @@ def make_the_plot(port1, baud1):
             msg = "Error in sensor readng "+raw
             return  
         try:
-            #ax.cla()
-            x=float(splitted[0])
-            y=float(splitted[1])
-            z=float(splitted[2])
-            
-            ax.scatter(x,y,z)
-            #ax.plot(x,y,z)
+
+            Xs.append(float(splitted[0]))
+            Ys.append(float(splitted[1]))
+            Zs.append(float(splitted[2]))
+            #ax.scatter(x,y,z)
+            ax.plot_wireframe(Xs,Ys,Zs)
             ax.set_xlim([0, 100])
             ax.set_ylim([0, 100])
             ax.set_zlim([0, 100])
-            #fig.suptitle("Title centered above all subplots", fontsize=14)
             ax.set_xlabel('x [cm]')
             ax.set_ylabel('y [cm]')
             ax.set_zlabel('z [cm]')
@@ -93,7 +91,6 @@ def serial_ports():
 
 
 def print_content():
-    #print(entry.get())
     pass
 
 def showCOMs():
@@ -144,7 +141,6 @@ def star3d():
     run_prog=1
     global t
     t=Thread(target=make_the_plot, args=(port,baud))
-    #t.deamon=True
     t.start()
     END_button = Button(root, text='End visualization!', command=end3d,bg="SteelBlue1",padx=5,pady=5).grid(row=9, column=2)
 
